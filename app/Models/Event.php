@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Enums\EventType;
 use App\Traits\HasDuration;
 use Carbon\Carbon;
+use Database\Factories\EventFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,6 +25,9 @@ class Event extends Model
         getDurationInDays as traitGetDurationInDays;
     }
     use softDeletes;
+
+    /** @use HasFactory<EventFactory> */
+    use HasFactory;
 
     const string RELATION_TRAINER = 'trainer';
 

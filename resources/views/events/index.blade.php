@@ -39,7 +39,7 @@
                     </div>
                     @if(null !== $event->trainer)
                     <div class="flex items-center gap-1">
-                        <span></span> {{ $event->trainer?->email }}
+                        <span></span> {{ $event->trainer?->name }}
                     </div>
                     @endif
                     <div class="flex items-center gap-1">

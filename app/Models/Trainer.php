@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Database\Factories\TrainerFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Collection\Collection;
@@ -11,6 +13,8 @@ use Ramsey\Collection\Collection;
  **/
 class Trainer extends Model
 {
+    /** @use HasFactory<TrainerFactory> */
+    use HasFactory;
     protected $fillable = [
         'name',
         'email',
