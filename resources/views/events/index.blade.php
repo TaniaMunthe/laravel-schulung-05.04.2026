@@ -37,6 +37,11 @@
                     <div class="flex items-center gap-1">
                         <span>📍</span> {{ $event->location }}
                     </div>
+                    @if(null !== $event->trainer)
+                    <div class="flex items-center gap-1">
+                        <span></span> {{ $event->trainer?->email }}
+                    </div>
+                    @endif
                     <div class="flex items-center gap-1">
                         <span>⏱</span>
                         <!-- Using our Trait Method -->
