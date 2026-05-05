@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $trainer = Trainer::factory(5)->create();
-        Event::factory(5)->create([
+        Event::factory(20)->create([
             'trainer_id' => fn() => $trainer->random()->getKey(),
         ]);
     }
