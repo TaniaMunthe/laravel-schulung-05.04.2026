@@ -8,7 +8,7 @@ use Illuminate\View\View;
 class EventController extends Controller
 {
     public function index(): View {
-        $events = Event::all();
+        $events = Event::query()->with(Event:: RELATION_TRAINER)->get();
 
         // dd($events);  // dump and die dump ($events)  die();
 

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 /**
  * @property EventType $type
  * @property Carbon $start_date
@@ -22,6 +23,8 @@ class Event extends Model
         getDurationInDays as traitGetDurationInDays;
     }
     use softDeletes;
+
+    const string RELATION_TRAINER = 'trainer';
 
     protected $fillable = [
         'title',
