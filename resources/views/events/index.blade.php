@@ -7,16 +7,16 @@
         <h1 class="text-4xl font-extrabold text-slate-800 tracking-tight">
             {{ $title }}
         </h1>
-        <a href="{{ route('events.create') }}" title="Create New Event">
+        <span class="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold ml-auto">
+            {{ $events->count() }} Events found
+        </span>
+        <a href="{{ route('events.create') }}" title="Create New Event" class="ml-6">
             <button class="bg-blue-500 hover:bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all">
                 <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
             </button>
         </a>
-        <span class="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-            {{ $events->count() }} Events found
-        </span>
     </header>
 
     <div class="grid gap-6">
@@ -52,8 +52,8 @@
                         <!-- Using Carbon Casting -->
                         {{ $event->start_date->format('D, d.M Y') }}
                     </div>
-                    <div>
-                        <a href="{{ route('events.edit', ['event' => $event]) }}">edit</a>
+                    <div class="flex items-right gap-1 ml-auto">
+                        <a href="{{ route('events.edit', ['event' => $event]) }}">✍ bearbeiten</a>
                     </div>
                 </div>
             </div>

@@ -12,21 +12,19 @@ use Illuminate\View\View;
 
 class EventController extends Controller
 {
-    public function index(): View {
-        $events = Event::query()->with(Event:: RELATION_TRAINER)->get();
+    public function index(): View
+    {
+        $events = Event::query()->with(Event::RELATION_TRAINER)->get();
 
-        // dd($events);  // dump and die dump ($events)  die();
-
-
-        return view('events.index', ['title' => 'GFU Training Schedule', 'events' => $events,]);
+        return view('events.index', [
+            'title' => 'GFU Training Schedule',
+            'events' => $events,
+        ]);
     }
 
     public function create(): View
     {
-        return view('events.form', [
-            'trainers' => Trainer::all(),
-            'types' => EventType::cases(),
-        ]);
+        return $this->form();
     }
 
     public function store(CreateEventRequest $request)
@@ -52,7 +50,8 @@ class EventController extends Controller
         ]);
     }
 
-    private function form(array $data): View {
+    private function form(array $data = []): View
+    {
         return view('events.form', array_merge([
             'trainers' => Trainer::all(),
             'types' => EventType::cases(),

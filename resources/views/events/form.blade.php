@@ -13,7 +13,7 @@
                 <!-- Title -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Event Titel</label>
-                    <input type="text" name="title" value="{{ old('title', $event?->title) }}"
+                    <input type="text" name="title" value="{{ old('title', isset($event) ? $event->title : null ) }}"
                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm border p-2">
                     @error('title')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -24,7 +24,7 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Beschreibung</label>
                     <textarea name="description" rows="3"
-                              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm border p-2">{{ old('description', $event?->description) }}</textarea>
+                              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm border p-2">{{ old('description',isset($event) ? $event->description : null )  }}</textarea>
                     @error('description')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -36,7 +36,7 @@
                     <select name="trainer_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm border p-2">
                         <option value="" class="hidden">-- Trainer auswählen --</option>
                         @foreach($trainers as $trainer)
-                            <option value="{{ $trainer->getKey() }}" {{ old('trainer_id', $event?->trainer->getKey()) == $trainer->getKey() ? 'selected' : '' }}>
+                            <option value="{{ $trainer->getKey() }}" {{ old('trainer_id', isset($event) ? $event->trainer?->getKey() : null) == $trainer->getKey() ? 'selected' : '' }}>
                                 {{ $trainer->name }}
                             </option>
                         @endforeach
@@ -49,7 +49,7 @@
                 <!-- Location -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Location</label>
-                    <input type="text" name="location" value="{{ old('location', $event?->location) }}"
+                    <input type="text" name="location" value="{{ old('location', isset($event) ? $event->location : null )  }}"
                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm border p-2">
                     @error('location')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -63,7 +63,7 @@
                         @foreach($types as $type)
                             <label class="inline-flex items-center">
                                 <input type="radio" name="type" value="{{ $type->value }}"
-                                       class="text-blue-600 focus:ring-blue-500" {{ old('type', $event?->type->value) == $type->value ? 'checked' : '' }}>
+                                       class="text-blue-600 focus:ring-blue-500" {{ old('type', isset($event) && $event->type->value) == $type->value ? 'checked' : '' }}>
                                 <span class="ml-2 text-sm text-gray-600">{{ $type->label() }}</span>
                             </label>
                         @endforeach
@@ -77,7 +77,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Startdatum</label>
-                        <input type="date" name="start_date" value="{{ old('start_date', $event?->start_date->format('Y-m-d')) }}"
+                        <input type="date" name="start_date" value="{{ old('start_date', isset($event) ? $event->start_date->format('Y-m-d') : null) }}"
                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm border p-2">
                         @error('start_date')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -85,7 +85,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Enddatum</label>
-                        <input type="date" name="end_date" value="{{ old('end_date', $event?->end_date->format('Y-m-d')) }}"
+                        <input type="date" name="end_date" value="{{ old('end_date', isset($event) ? $event->end_date->format('Y-m-d') : null) }}"
                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm border p-2">
                         @error('end_date')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
