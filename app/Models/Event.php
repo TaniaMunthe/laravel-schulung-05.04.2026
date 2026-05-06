@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\EventType;
 use App\Traits\HasDuration;
+use App\Traits\isTaggable;
 use Carbon\Carbon;
 use Database\Factories\EventFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -37,6 +38,9 @@ class Event extends Model
 
     /** @use HasFactory<EventFactory> */
     use HasFactory;
+
+    /** @use IsTaggable<Event> */
+    use isTaggable;
 
     const string RELATION_TRAINER = 'trainer';
 

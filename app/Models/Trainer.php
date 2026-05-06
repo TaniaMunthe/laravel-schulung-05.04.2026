@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\isTaggable;
 use Database\Factories\TrainerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,9 @@ class Trainer extends Model
 {
     /** @use HasFactory<TrainerFactory> */
     use HasFactory;
+
+    /** @use isTaggable<Trainer> */
+    use isTaggable;
     protected $fillable = [
         'name',
         'email',
