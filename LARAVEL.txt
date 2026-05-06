@@ -1,0 +1,173 @@
+Trainer:  mail@timopaul.biz
+GitHub: https://github.com/timopaul/gfu-schulung-2026-05-04
+
+LARAVEL
+
+----- https://laravel.com/docs/13.x
+
+XAMPP/ Laragon --> starten
+localhost auf Google
+und neu Datenbank auf phpMyAdmin  -> now it changed Laragon
+
+
+.gitignore -->.env
+
+LARAVEL grund Table  --> Standard Table
+git prefix --> chroe, fix, feat ..
+
+
+ Laravel Setup
+1. laragon -> neu Datenbank erstellen
+2. C:\laragon\www>composer create-project laravel/laravel gfu-event-Manager
+3. öffnen .env
+4. APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:28p/8XtbDhNAiTScNYJOTMRHd8kFdzliCaBBp8Y7Nj0=
+APP_DEBUG=true
+APP_URL=http://localhost/gfu-event-manager/public/
+
+APP_LOCALE=de
+APP_FALLBACK_LOCALE=de
+APP_FAKER_LOCALE=de_DE
+
+APP_MAINTENANCE_DRIVER=file
+# APP_MAINTENANCE_STORE=database
+
+# PHP_CLI_SERVER_WORKERS=4
+
+BCRYPT_ROUNDS=12
+
+LOG_CHANNEL=stack
+LOG_STACK=single
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=gfu-event-manager
+DB_USERNAME=root
+DB_PASSWORD=
+
+5. Tools/php85/php.ini
+6. C:\laragon\www\gfu-event-manager>php artisan migrate
+7. Git Setup (GitHub)
+8. Database -> design Pattern
+9. php artisan -> php artisan make:model Event -m
+z.b php artisan Rollback (rückging)  ->php artisan migrate:rollback
+
+10. PhpStorm --> open existieren file -> database verbunden
+
+11. Thema: Softdelete by laravel (automatisch verwendent) bei Immigration Datenbank
+12. Thema: php artisan make:model --help
+13. Thema: $casts (Carbon)  -> https://carbon.nesbot.com/guide/date-time-manipulation/string-formatting.html
+
+14. fill the table:
+PS C:\laragon\www\gfu-event-manager> php artisan tinker
+Psy Shell v0.12.22 (PHP 8.5.5 — cli) by Justin Hileman
+New PHP manual is available (latest: 3.0.5). Update with `doc --update-manual`
+
+> $e = new App\Models\Event();
+
+= App\Models\Event {#7387}
+
+> $e->title = "Laravel Basic Course";
+
+= "Laravel Basic Course"
+
+> $e->description = "Learning the fundaments";
+
+= "Learning the fundaments"
+
+> $e->start_date="2026-05-04 00:00:00";
+
+= "2026-05-04 00:00:00"
+
+> $e->end_date="2026-05-08 00:00:00";
+
+= "2026-05-08 00:00:00"
+
+> $e->location = "GFU Cologne";
+
+= "GFU Cologne"
+
+> $e->save();
+
+= true
+
+>
+App\Models\Event::all();  //Need to run this command first and then can run echo $e
+16
+
+= Illuminate\Database\Eloquent\Collection {#8168
+    all: [
+      App\Models\Event {#8169
+        id: 1,
+        title: "Laravel Basic Course",
+        description: "Learning the fundaments",
+        type: "onsite",
+        start_date: "2026-05-04 00:00:00",
+        end_date: "2026-05-08 00:00:00",
+        location: "GFU Cologne",
+        deleted_at: null,
+        created_at: "2026-05-04 12:20:51",
+        updated_at: "2026-05-04 12:20:51",
+      },
+    ],
+  }
+> echo $e;
+
+{"title":"Laravel Basic Course","description":"Learning the fundaments","start_date":"2026-05-04T00:00:00.000000Z","end_date":"2026-05-08 00:00:00","location":"GFU Cologne","updated_at":"2026-05-04T12:20:51.000000Z","created_at":"2026-05-04T12:20:51.000000Z","id":1}⏎
+
+>
+
+15. Thema: Enum
+16. /**
+ * @property EventType $event_type
+ * @property Carbon $start_date
+ * @property Carbon $end_date
+ */  --> das ist Carbon block
+
+17. dump($events);
+        exit();  --> anzeige in Backend
+
+18. onDelete('cascade') z.b wenn Trainer ist deleted dann Events will auch gelöscht
+    onDelete('restrict') z.b der Trainer kann nicht gelöscht werden wenn gibt noch Events z.b so
+
+19. created factory
+PS C:\laragon\www\gfu-event-manager> php artisan make:factory TrainerFactory --model=Trainer
+
+   INFO  Factory [C:\laragon\www\gfu-event-manager\database\factories\TrainerFactory.php] created successfully.
+
+--faker (ein Bibliothek für test daten)
+--safeEmail (von Syntax correct ist)
+
+20. added new Factory and seeders
+PS C:\laragon\www\gfu-event-manager> php .\artisan db:seed
+
+   INFO  Seeding database.
+
+21 die ganze Datenbank würde gelöscht und wieder refresh
+PS C:\laragon\www\gfu-event-manager> php artisan migrate:fresh --seed
+
+  Dropping all tables ................................................................................................................ 163.90ms DONE
+
+   INFO  Preparing database.
+
+  Creating migration table ............................................................................................................ 22.66ms DONE
+
+   INFO  Running migrations.
+
+  0001_01_01_000000_create_users_table ................................................................................................ 97.03ms DONE
+  0001_01_01_000001_create_cache_table ................................................................................................ 66.09ms DONE
+  0001_01_01_000002_create_jobs_table ................................................................................................ 119.89ms DONE
+  2026_05_04_100147_create_events_table ............................................................................................... 20.63ms DONE
+  2026_05_05_071430_create_trainers_table ............................................................................................. 33.64ms DONE
+  2026_05_05_072445_add_trainer_id_to_events_table .................................................................................... 76.73ms DONE
+
+
+   INFO  Seeding database.
+22. Thema: Livewire --> Livewire allows you to build dynamic, reactive interfaces using only PHP—no JavaScript required. Instead of writing frontend code in JavaScript frameworks, you write simple PHP classes and Blade templates, and Livewire handles all the complex JavaScript behind the scenes.
+https://livewire.laravel.com/docs/4.x/quickstart
+
+23. php .\artisan route:list

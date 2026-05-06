@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Event;
+use App\Models\Tag;
 use App\Models\Trainer;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -19,9 +20,23 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $trainer = Trainer::factory(5)->create();
-        Event::factory(20)->create([
-            'trainer_id' => fn() => $trainer->random()->getKey(),
+        $tags = Tag::factory(10)->create();
+
+        $trainers = Trainer::factory(5)->create();
+
+        $trainers->each(function (Trainer $trainer) use ($tags) {
+            $trainer->tags()->sync(
+                $tags->random(rand(1, 3))->pluck((new Tag)->getKeyName())->all()
+            );
+        });
+
+        $events = Event::factory(20)->create([
+            'trainer_id' => fn() => $trainers->random()->getKey(),
         ]);
+        $events->each(function (Event $event) use ($tags) {
+            $event->tags()->sync(
+                $tags->random(rand(3, 5))->pluck((new Event)->getKeyName())->all()
+            );
+        });
     }
 }
