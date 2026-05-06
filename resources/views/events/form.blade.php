@@ -94,7 +94,11 @@
                 </div>
 
                 <!-- Submit Button -->
-                <div class="flex justify-end pt-4">
+                <div class="flex item-center w-full pt-4">
+                    @if(isset($event))
+                        <a href="{{ route('events.remove', ['event' => $event]) }}" class="gap-x-2 text-sm mr-auto inline-flex items-center rounded-lg bg-white text-gray-700 hover:text-gray-900 transition-all px-6 py-2 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-500 hover:bg-gray-50">Event löschen</a>
+                    @endif
+                    <a href="{{ url()->previous() }}" class="gap-x-2 text-sm inline-flex items-center rounded-lg bg-white text-gray-700 hover:text-gray-900 transition-all px-6 py-2 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-500 hover:bg-gray-50 ml-auto mr-4">zurück</a>
                     <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition shadow-md">
                         {{ isset($event) ? 'aktualisieren' : 'speichern' }}
                     </button>
