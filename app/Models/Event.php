@@ -15,8 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 /**
-
-    * @mixin Builder<Event>
+ * @mixin Builder<Event>
     *
     * @property string $title
     * @property string $label
@@ -26,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     * @property-read Trainer|null $trainer
     *
     * @method static Builder<Event>|self upcoming()
+    * @method static Builder<Event>|self formTrainer(Trainer $trainer)
 */
 
 class Event extends Model

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Interfaces\Services\EventServiceInterface;
+use App\Services\EventService;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(EventServiceInterface::class, EventService::class);
     }
 
     /**
